@@ -1,5 +1,6 @@
 // 메테리얼 패키지 임포트
 import 'package:flutter/material.dart';
+import 'package:english_words/english_words.dart';
 
 // runApp 는 위젯 트리의 루트로 만듬.
 void main() => runApp(MyApp());
@@ -9,6 +10,7 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final wordPair = WordPair.random();
     /*
 			https://api.flutter.dev/flutter/material/MaterialApp-class.html
     */
@@ -20,9 +22,25 @@ class MyApp extends StatelessWidget {
           title: Text('appBar Welcome to Flutter'), // 우선순
         ),
         body: Center(
-          child: Text('Hello World'),
+          child: Text(wordPair.asPascalCase),
         ),
       ),
     );
   }
+}
+
+// extends 상속을 위한 키워드 => 단일 상속만 허용,
+class RandomWordsState extends State<RandomWords> {
+  // TODO Add build() method
+  @override
+  Widget build(BuildContext context) {
+    final wordPair = WordPair.random();
+    return Text(wordPair.asPascalCase);
+  }
+}
+
+// 상태 클래스를 생성함.
+class RandomWords extends StatefulWidget {
+  @override
+  RandomWordsState createState() => RandomWordsState();
 }
