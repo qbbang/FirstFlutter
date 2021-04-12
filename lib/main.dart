@@ -10,7 +10,6 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final wordPair = WordPair.random();
     /*
 			https://api.flutter.dev/flutter/material/MaterialApp-class.html
     */
@@ -22,7 +21,7 @@ class MyApp extends StatelessWidget {
           title: Text('appBar Welcome to Flutter'), // 우선순
         ),
         body: Center(
-          child: Text(wordPair.asPascalCase),
+          child: RandomWords()
         ),
       ),
     );
