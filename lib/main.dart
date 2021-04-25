@@ -1,45 +1,48 @@
-// 메테리얼 패키지 임포트
-import 'package:flutter/material.dart';
-import 'package:english_words/english_words.dart';
+// Copyright 2019 The Flutter team. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
 
-// runApp 는 위젯 트리의 루트로 만듬.
-void main() => runApp(MyApp());
 
-// StatelessWidget는 빌드 시 단 한번만 그려짐
-// StatefulWidget는 state 포함하며, setState가 발생할때마다 build됨 동적인거
+import 'package:flutter/material.dart';   // 메테리얼 디자인 적용을 위한 패키지 사용
+import 'package:provider/provider.dart';  // 상태관리를 위해 provider 패키지 사용
+// 사용자가 만든 유틸, 모델, 화면 패키지 사용
+import 'package:first_app/common/theme.dart';
+import 'package:first_app/models/cart.dart';
+import 'package:first_app/models/catalog.dart';
+import 'package:first_app/screens/cart.dart';
+import 'package:first_app/screens/catalog.dart';
+import 'package:first_app/screens/login.dart';
+
+// 프로그램 시작지점
+void main() {
+  runApp(MyApp());
+}
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    /*
-			https://api.flutter.dev/flutter/material/MaterialApp-class.html
-    */
-    return MaterialApp(
-      title: 'title Welcome to Flutter',
-      // iOS NavigationBar + Tabbar 섞은거?
-      home: Scaffold(
-        appBar: AppBar( // NavigationBar
-          title: Text('appBar Welcome to Flutter'), // 우선순
+    return MultiProvider(
+      providers: [
+        Provider(create: (context) => CatalogModel()),
+        ChangeNotifierProxyProvider<CatalogModel, CartModel>(
+          create: (context) => CartModel(),
+          update: (context, catalog, cart) {
+            if (cart == null) throw ArgumentError.notNull('cart');
+            cart.catalog = catalog;
+            return cart;
+          },
         ),
-        body: Center(
-          child: RandomWords()
-        ),
+      ],
+      child: MaterialApp(
+        title: 'Provider Demo',
+        theme: appTheme,
+        initialRoute: '/',
+        routes: {
+          '/': (context) => MyLogin(),
+          '/catalog': (context) => MyCatalog(),
+          '/cart': (context) => MyCart(),
+        },
       ),
     );
   }
-}
-
-// extends 상속을 위한 키워드 => 단일 상속만 허용,
-class RandomWordsState extends State<RandomWords> {
-  // TODO Add build() method
-  @override
-  Widget build(BuildContext context) {
-    final wordPair = WordPair.random();
-    return Text(wordPair.asPascalCase);
-  }
-}
-
-// 상태 클래스를 생성함.
-class RandomWords extends StatefulWidget {
-  @override
-  RandomWordsState createState() => RandomWordsState();
 }
