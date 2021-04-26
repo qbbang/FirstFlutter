@@ -1,16 +1,12 @@
 # first_app
 
-A new Flutter application.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+## feature/provider_shopper
 
-A few resources to get you started if this is your first Flutter project:
+[provider_shopper 분석 정리하긔](https://www.qbbang.me/flutter---providershopper)
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+##  feature/mildTaste
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+[코딩셰프 순한맛 따라하긔](https://www.youtube.com/playlist?list=PLQt_pzi-LLfpcRFhWMywTePfZ2aPapvyl)      
+[코딩셰프 순한맛 정리하긔](https://www.qbbang.me/-flutter)    
